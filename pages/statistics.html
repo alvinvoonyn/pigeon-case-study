@@ -1,1 +1,50 @@
-<h1>Put your code here :P</h1>
+<!--<h1>Put your code here :P</h1>-->
+<!--Line Chart-->
+<pigeon-chart query="SELECT relyear, tmdb_votes AS 'TMDB Votes'
+					 FROM movie
+					 WHERE relyear >= 2006
+					 ORDER BY relyear DESC"
+			  title="Total TMDB Votes of Movies"
+			  subtitle="Movies between 2006 and 2016"
+			  axisy-title="Total TMDB Votes"
+			  axisx-title="Year"
+			  show-legend="true"
+			  data-data-label="false">
+</pigeon-chart>
+
+<!--Bar Chart: Multi-series-->
+<pigeon-chart query="SELECT ratingcode, count(movieno) AS 'Movie Count'
+					 FROM movie
+					 GROUP BY ratingcode"
+			  title="Total Number of Movies by Ratingcode"
+			  type="bar"
+			  axisy-title="Number of Movies"
+			  axisx-title="Rating Code"
+			  show-legend="true"
+			  data-data-label="true">
+</pigeon-chart>
+
+<!--Column Chart-->
+<pigeon-chart query="SELECT ratingcode, colourcode, min(runtime) AS 'Minimum', avg(runtime) AS 'Average', max(runtime) AS 						'Maximum'
+					 FROM movie
+					 GROUP BY ratingcode, colourcode"
+			  title="Comparison of Movie Runtime by Ratingcode and Colourcode"
+			  subtitle="Mix, Max anf Average"
+			  type="column"
+			  axisy-title="Gender Count"
+			  show-legend="true"
+			  data-data-label="false">
+</pigeon-chart>
+
+<!--Pie Chart-->
+<pigeon-chart query="SELECT birthcountry, count(actorno)
+					 FROM actor
+					 WHERE BIRTHCOUNTRY IN ('USA', 'England', 'Germany', 'Australia', 'Canada')
+					 GROUP BY birthcountry"
+			  title="Total Number of Actors From 5 Different Countries"
+			  subtitle="USA, England, Germany, Australia and Canada"
+			  type="pie"
+			  axisy-title="Gender Count"
+			  show-legend="true"
+			  data-data-label="true">
+</pigeon-chart>
