@@ -2,7 +2,7 @@
 /*jslint vars: true*/
 /*jslint plusplus: true*/
 
-var app = angular.module("myApp", ['ngRoute']);
+var app = angular.module("myApp", ['ngRoute', 'pigeon-table', 'pigeon-chart']);
 
 app.config(function ($routeProvider) {
 	$routeProvider
@@ -11,25 +11,22 @@ app.config(function ($routeProvider) {
 			templateUrl: "pages/dashboard.html"
 		})
 		.when("/movie_db", {
-            controller: "movieDbCtrl",
+            controller: "myCtrl",
 			templateUrl: "pages/movie_db.html"
 		})
 		.when("/actor_db", {
 			controller: "myCtrl",
-			templateUrl: "pages/changepwd.html"
+			templateUrl: "pages/actor_db.html"
 		})
         .when("/satistics", {
-			controller: "satisticsCtrl",
-			templateUrl: "pages/changepwd.html"
+			controller: "myCtrl",
+			templateUrl: "pages/statistics.html"
 		});
 
 });
 
 app.controller("myCtrl", function ($scope, $http, $rootScope) {
-    $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
 
-        console.log(current);
-    });
 });
 
 app.controller("dashboardCtrl", function ($scope, $http) {
@@ -38,24 +35,19 @@ app.controller("dashboardCtrl", function ($scope, $http) {
 
     function getData() {
 
-        $scope.queries.push("SELECT count(ACTORNO) FROM actor");
-        $scope.queries.push("SELECT count(MOVIENO) FROM movie");
 
+        $http.post("pigeon-core/get-data.php", {'sql': "SELECT GENDER as Gender, count(GENDER) as 'Number of Actor' FROM actor GROUP BY GENDER"})
+            .then(function(response) {
+                $scope.actor = response.data.data;
+        });
 
-        for (var i = 0; i < $scope.queries.length; i++) {
-            $http.post("pigeon-core/get-data.php", {'sql': $scope.queries[i]})
-                .then(function(response) {
-
-            })
-
-        }
+        $http.post("pigeon-core/get-data.php", {'sql': "SELECT RATINGCODE as 'Rating Code', count(RATINGCODE) as 'Number of Movie' FROM movie GROUP BY RATINGCODE"})
+            .then(function(response) {
+                $scope.movie = response.data.data;
+        });
 
     }
 
     getData();
-
-});
-
-app.controller("movieDbCtrl", function ($scope, $http, $compile) {
 
 });

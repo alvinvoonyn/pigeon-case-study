@@ -37,8 +37,6 @@ app.directive("pigeonTable", function ($parse, $http) {
         return linkFunction;
     };
 
-    console.log("pigeon table loaded");
-
     return direc;
 });
 

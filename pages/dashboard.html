@@ -3,7 +3,16 @@
         <div class="panel panel-default">
             <div class="panel-heading">Total Actor</div>
             <div class="panel-body">
-                <div id="d1-c1" style="height:150px"></div>
+                <div class="col-md-10 col-md-push-1">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr ng-repeat="(key, value) in actor[0]">
+                                <td><strong>{{key}}</strong></td>
+                                <td ng-repeat="item in actor">{{item[key]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -12,7 +21,16 @@
         <div class="panel panel-default">
             <div class="panel-heading">Total Movie</div>
             <div class="panel-body">
-                <div id="d1-c2" style="height:150px"></div>
+                <div class="col-md-10 col-md-push-1">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr ng-repeat="(key, value) in movie[0]">
+                                <td><strong>{{key}}</strong></td>
+                                <td ng-repeat="item in movie">{{item[key]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
