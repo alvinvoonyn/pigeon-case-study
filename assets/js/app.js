@@ -32,6 +32,7 @@ app.controller("myCtrl", function ($scope, $http, $rootScope) {
 app.controller("dashboardCtrl", function ($scope, $http) {
 
     $scope.queries = [];
+	$scope.images = [];
 
     function getData() {
 
@@ -46,6 +47,16 @@ app.controller("dashboardCtrl", function ($scope, $http) {
                 $scope.movie = response.data.data;
         });
 
+		$http.get("https://api.themoviedb.org/3/discover/movie?api_key=40f95d64ec838aed5995fafa9cbecda8&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1").then(function(response){
+			angular.forEach(response.data.results, function(obj){
+				if(obj.poster_path != null){
+					$scope.images.push(obj.poster_path);
+				}
+			});
+				$(document).ready(function(){
+					 $("#carousel").carousel();
+				});
+		});
     }
 
     getData();
