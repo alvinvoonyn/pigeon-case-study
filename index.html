@@ -7,11 +7,27 @@
         <link rel="stylesheet" type="text/css" href="assets/css/material-design.css">
         <link rel="stylesheet" type="text/css" href="assets/css/small-n-flat.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-
         <link rel="stylesheet" type="text/css" href="pigeon-table/css/pigeon-table.css">
+        <link rel="stylesheet" type="text/css" href="assets/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+
+        <style>
+            .owl-carousel .item{
+                margin: 3px;
+            }
+            .owl-carousel .item img{
+                display: block;
+
+            }
+        </style>
+
         <title>IMDB - Admin Module</title>
     </head>
+
     <body class="cm-no-transition cm-2-navbar" ng-controller="myCtrl">
+
+        <pigeon-auth require-auth="true" login-page="login.html"></pigeon-auth>
+
         <div id="cm-menu">
             <nav class="cm-navbar cm-navbar-primary">
                 <div class="cm-flex text-center" style="vertical-align: middle"><a href="index.html"><img src="assets/img/IMDB_Logo_2016.svg" width="80px" /></a></div>
@@ -104,10 +120,12 @@
         <script src="assets/js/fastclick.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/clearmin.min.js"></script>
+        <script src="assets/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
 
         <script src="pigeon-table/js/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular-route.js"></script>
         <script src="pigeon-table/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+        <script src="pigeon-auth/js/pigeon-auth.js"></script>
         <script src="pigeon-table/js/pigeon-table.js"></script>
 
         <script src='https://code.highcharts.com/highcharts.js'></script>
