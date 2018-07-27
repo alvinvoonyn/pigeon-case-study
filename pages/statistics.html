@@ -12,6 +12,9 @@
 			  data-data-label="false">
 </pigeon-chart>
 
+<br />
+<br />
+
 <!--Bar Chart: Multi-series-->
 <pigeon-chart query="SELECT ratingcode, count(movieno) AS 'Movie Count'
 					 FROM movie
@@ -24,6 +27,9 @@
 			  data-data-label="true">
 </pigeon-chart>
 
+<br />
+<br />
+
 <!--Column Chart-->
 <pigeon-chart query="SELECT ratingcode, colourcode, min(runtime) AS 'Minimum', avg(runtime) AS 'Average', max(runtime) AS 						'Maximum'
 					 FROM movie
@@ -35,6 +41,9 @@
 			  show-legend="true"
 			  data-data-label="false">
 </pigeon-chart>
+
+<br />
+<br />
 
 <!--Pie Chart-->
 <pigeon-chart query="SELECT birthcountry, count(actorno)

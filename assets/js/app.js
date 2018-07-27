@@ -6,7 +6,7 @@ var app = angular.module("myApp", ['ngRoute', 'pigeon-auth', 'pigeon-table', 'pi
 
 app.config(function ($routeProvider) {
 	$routeProvider
-		.when("/dashboard", {
+		.when("/", {
 			controller: "dashboardCtrl",
 			templateUrl: "pages/dashboard.html"
 		})
@@ -22,7 +22,6 @@ app.config(function ($routeProvider) {
 			controller: "myCtrl",
 			templateUrl: "pages/statistics.html"
 		});
-
 });
 
 app.controller("myCtrl", function ($scope, $http, $rootScope) {

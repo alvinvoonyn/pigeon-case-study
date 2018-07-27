@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-6">
         <div class="panel panel-default">
-            <div class="panel-heading">Total Actor</div>
+            <div class="panel-heading" style="color: #000000;">Total Actor</div>
             <div class="panel-body">
                 <div class="col-md-10 col-md-push-1">
                     <table class="table table-striped">
@@ -19,7 +19,7 @@
 
     <div class="col-sm-6">
         <div class="panel panel-default">
-            <div class="panel-heading">Total Movie</div>
+            <div class="panel-heading" style="color: #000000;">Total Movie</div>
             <div class="panel-body">
                 <div class="col-md-10 col-md-push-1">
                     <table class="table table-striped">
@@ -36,27 +36,16 @@
     </div>
 </div>
 
-<!--
-<div class="carousel slide" data-ride="carousel">
-	 Wrapper for slides
-	<div class="carousel-inner">
-	  <div ng-repeat="img in images track by $index" class="item">
-		  <img style="width:100%;" ng-src="https://image.tmdb.org/t/p/w500{{img}}">
-	  </div>
-	</div>
-</div>
--->
+<br />
 
-<!--<div id="carousel" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-	  <div ng-repeat="img in images track by $index" class="item">
-		  <img class="center-block" ng-src="https://image.tmdb.org/t/p/w500/{{img}}">
-	  </div>
-  </div>
-</div>-->
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <h3>Latest Movie</h3>
+    </div>
+</div>
 
 <div class="owl-carousel owl-theme" style="height: 100px">
-    <div ng-repeat="img in images track by $index" class="item" init-owl-carousel><img class="center-block" style="heigh:400px; width:300px;" ng-src="https://image.tmdb.org/t/p/w500{{img}}" /></div>
+    <div ng-repeat="img in images track by $index" class="item" init-owl-carousel><img class="center-block" style="height:400px; width:300px;" ng-src="https://image.tmdb.org/t/p/w500{{img}}" /></div>
 </div>
 
 <!--
