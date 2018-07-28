@@ -44,9 +44,28 @@
     </div>
 </div>
 
-<div class="owl-carousel owl-theme" style="height: 100px">
-    <div ng-repeat="img in images track by $index" class="item" init-owl-carousel><img class="center-block" style="height:400px; width:300px;" ng-src="https://image.tmdb.org/t/p/w500{{img}}" /></div>
+<div class='row'>
+    <div class="col-sm-12">
+        <div class="owl-carousel owl-theme">
+            <div ng-repeat="img in images track by $index" class="item" init-owl-carousel><img class="center-block" style="height:400px; width:300px;" ng-src="https://image.tmdb.org/t/p/w500{{img}}" /></div>
+        </div>
+    </div>
 </div>
+
+<br />
+<br />
+<hr />
+
+<div class="row">
+    <div class="col-sm-12">
+        <h3 class="text-center" style="text-decoration: underline">Statistics of Movies 2000 - 2016</h3>
+        <br />
+        <br />
+        <pigeon-table query="SELECT RELYEAR as 'Release_Year', AVG(TMDB_SCORE) as 'Average of TMDB Score', AVG(TMDB_VOTES) as 'Average of TMDB Votes', AVG(RUNTIME) as 'Average of Runtime', COUNT(RELYEAR) as 'Total Number' FROM movie WHERE RELYEAR >= 2000 GROUP BY RELYEAR" editable="false" control="true" direction="vertical"></pigeon-table>
+    </div>
+
+</div>
+
 
 <!--
 <div class="panel panel-default">

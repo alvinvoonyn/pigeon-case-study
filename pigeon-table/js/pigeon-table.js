@@ -1,7 +1,8 @@
-/*global angular, console, $, alert, jQuery*/
+/*global angular, document, console, $, alert, jQuery*/
 /*jslint vars: true*/
 /*jslint plusplus: true*/
 
+var path = document.currentScript.src.substr(0, document.currentScript.src.lastIndexOf("pigeon-table/"));
 var app = angular.module("pigeon-table", ['ui.bootstrap']);
 
 app.filter("offset", function () {
@@ -19,12 +20,13 @@ app.directive("pigeonTable", function ($parse, $http) {
     direc.scope = {
         query : "@",
         editable: "=editable",
-        control: "=control"
+        control: "=control",
+        direction: "@"
     };
 
     direc.controller = "pigeonTable";
 
-    direc.templateUrl = 'pigeon-table/template/outputTemplate.html';
+    direc.templateUrl = path + 'pigeon-table/template/outputTemplate.html';
 
     direc.compile = function () {
         var linkFunction = function (scope, element, attributes) {
@@ -45,7 +47,7 @@ app.controller("pigeonTable", function ($scope, $http, $uibModal) {
 
     $scope.init = function () {
         //Data Driven Settings
-        $scope.isLoading = true;
+        $scope.isLoading = false;
         $scope.error = false;
         $scope.firstExecuted = false;
 
@@ -80,16 +82,30 @@ app.controller("pigeonTable", function ($scope, $http, $uibModal) {
             $scope.btn = false;
         }
 
-        $scope.queryValidatation();
+        $scope.attrValidatation();
     };
 
-    //Validate query and fetch data
-    $scope.queryValidatation = function () {
-        if ($scope.query.toUpperCase().includes("SELECT")) {
-            $scope.getData();
+    //Validate attribute and fetch data
+    $scope.attrValidatation = function () {
+        $scope.errorMsg = "";
+
+        if (!$scope.query.toUpperCase().includes("SELECT")) {
+            $scope.error = true;
+            $scope.errorMsg = $scope.errorMsg + "Pigeon Table accepts SELECT query only\n";
+        }
+
+        if ($scope.direction === undefined) {
+            $scope.error = true;
+            $scope.errorMsg = $scope.errorMsg + "Please specify the direction of table.\n";
+        } else if ($scope.direction.toLowerCase() === "horizontal" || $scope.direction.toLowerCase() === "vertical") {
+            //Do nothing
         } else {
             $scope.error = true;
-            $scope.errorMsg = "Pigeon Table accepts SELECT query only";
+            $scope.errorMsg = $scope.errorMsg + "Wrong direction value.\n";
+        }
+
+        if (!$scope.error) {
+            $scope.getData();
         }
     };
 
@@ -118,7 +134,7 @@ app.controller("pigeonTable", function ($scope, $http, $uibModal) {
     //Fetch Data from MySQL
     $scope.getData = function () {
         $scope.isLoading = true;
-        $http.post("pigeon-core/get-data-with-crud.php", {'sql': $scope.query})
+        $http.post(path + "pigeon-core/get-data-with-crud.php", {'sql': $scope.query})
             .then(function (response) {
                 if (typeof response.data.data === 'string') {
                     $scope.error = true;
@@ -285,7 +301,7 @@ app.controller("InsertModalInstanceCtrl", function ($scope, $http, $uibModalInst
         form.sqlType = "INSERT";
         form.tableStructure = tableStructure;
 
-        $http.post("pigeon-core/get-data-with-crud.php", JSON.stringify(form))
+        $http.post(path + "pigeon-core/get-data-with-crud.php", JSON.stringify(form))
             .then(function (response) {
                 if (response.data === "Inserted") {
                     $uibModalInstance.close($scope.form);
@@ -317,7 +333,7 @@ app.controller("EditModalInstanceCtrl", function ($scope, $http, $uibModalInstan
         form.sqlType = "UPDATE";
         form.tableStructure = tableStructure;
 
-        $http.post("pigeon-core/get-data-with-crud.php", JSON.stringify(form))
+        $http.post(path + "pigeon-core/get-data-with-crud.php", JSON.stringify(form))
             .then(function (response) {
                 if (response.data === "Updated") {
                     $uibModalInstance.close($scope.selectedData);
@@ -349,7 +365,7 @@ app.controller("DeleteModalInstanceCtrl", function ($scope, $http, $uibModalInst
         form.sqlType = "DELETE";
         form.tableStructure = tableStructure;
 
-        $http.post("pigeon-core/get-data-with-crud.php", JSON.stringify(form))
+        $http.post(path + "pigeon-core/get-data-with-crud.php", JSON.stringify(form))
             .then(function (response) {
                 if (response.data === "Deleted") {
                     $uibModalInstance.close($scope.selectedData);
@@ -367,9 +383,5 @@ app.controller("DeleteModalInstanceCtrl", function ($scope, $http, $uibModalInst
     };
 });
 
-angular.bootstrap(document.getElementsByTagName("pigeon-table"), ['pigeon-table']);
-
 //Load pigeon-table angular module when pigeon-table tag is found in document.
-if (document.getElementsByTagName("pigeon-table").length > 0) {
-    angular.bootstrap(document.getElementsByTagName("pigeon-table"), ['pigeon-table']);
-}
+angular.bootstrap(document.getElementsByTagName("pigeon-table"), ['pigeon-table']);
