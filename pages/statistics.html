@@ -6,10 +6,11 @@
 					 ORDER BY relyear DESC"
 			  title="Total TMDB Votes of Movies"
 			  subtitle="Movies between 2006 and 2016"
-			  axisy-title="Total TMDB Votes"
-			  axisx-title="Year"
-			  show-legend="true"
-			  data-data-label="false">
+			  axis-y-title="Total TMDB Votes"
+			  axis-x-title="Year"
+			  show-legend="left"
+			  show-data-label="false"
+			  zoom-type="xy">
 </pigeon-chart>
 
 <br />
@@ -21,10 +22,10 @@
 					 GROUP BY ratingcode"
 			  title="Total Number of Movies by Ratingcode"
 			  type="bar"
-			  axisy-title="Number of Movies"
-			  axisx-title="Rating Code"
-			  show-legend="true"
-			  data-data-label="true">
+			  axis-y-title="Number of Movies"
+			  axis-x-title="Rating Code"
+			  show-legend="right"
+			  show-data-label="true">
 </pigeon-chart>
 
 <br />
@@ -37,9 +38,10 @@
 			  title="Comparison of Movie Runtime by Ratingcode and Colourcode"
 			  subtitle="Mix, Max anf Average"
 			  type="column"
-			  axisy-title="Gender Count"
-			  show-legend="true"
-			  data-data-label="false">
+			  axis-y-title="Gender Count"
+			  show-legend="top"
+			  show-data-label="false"
+			  zoom-type="y">
 </pigeon-chart>
 
 <br />
@@ -53,7 +55,7 @@
 			  title="Total Number of Actors From 5 Different Countries"
 			  subtitle="USA, England, Germany, Australia and Canada"
 			  type="pie"
-			  axisy-title="Gender Count"
-			  show-legend="true"
-			  data-data-label="true">
+			  axis-y-title="Gender Count"
+			  show-legend="bottom"
+			  show-data-label="true">
 </pigeon-chart>
